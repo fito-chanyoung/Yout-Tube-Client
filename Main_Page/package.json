@@ -6,10 +6,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "chalk": "^4.0.0",
-    "eslint": "^6.6.0",
     "https": "^1.0.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
@@ -17,13 +16,23 @@
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.20",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true SSL_CRT_FILE=./cert.pem SSL_KEY_FILE=./key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mkbucket": "aws s3 mb s3://$npm_package_config_BUCKETNAME",
+    "rmbucket": "aws s3 rb s3://$npm_package_config_BUCKETNAME",
+    "lsbucket": "aws s3 ls",
+    "uploadObj": "aws s3 sync ./build s3://$npm_package_config_BUCKETNAME",
+    "lsObj": "aws s3 ls s3://$npm_package_config_BUCKETNAME",
+    "rmObj": "aws s3 rm s3://$npm_package_config_BUCKETNAME *"
+  },
+  "homepage": "./",
+  "config": {
+    "BUCKETNAME": "yourtube.cysong.net"
   },
   "eslintConfig": {
     "extends": "react-app"

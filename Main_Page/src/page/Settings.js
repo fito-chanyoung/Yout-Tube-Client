@@ -8,15 +8,16 @@ const Settings = ({
   isDarkMode,
   handleLoginToggle,
   handleSettingsToggle,
-  handleDarkModeToggle,
+  handleDarkModeToggle
 }) => {
   return (
     <div className={isSettingsOpen ? 'settings show' : 'settings'}>
-      <div className='shadow' onClick={handleSettingsToggle}></div>
+      <div className='shadow' onClick={handleSettingsToggle} />
       <div className='sidebar'>
         <button
           className={isDarkMode ? 'x-button dark' : 'x-button'}
-          onClick={handleSettingsToggle}>
+          onClick={handleSettingsToggle}
+        >
           &times;
         </button>
         <div className='settings_title'>
@@ -32,14 +33,18 @@ const Settings = ({
             <img src={profile.picture} alt='profile image' />
           </div>
           <div className='settings_profile_text'>
-            <h3 className='settings_profile_name'>{profile.name}</h3>
-            <p className='settings_profile_email'>{profile.email}</p>
+            <h3 className='settings_profile_name'>
+              {profile.name}
+            </h3>
+            <p className='settings_profile_email'>
+              {profile.email}
+            </p>
           </div>
         </div>
 
         <hr />
         <fieldset>
-          <input type='checkbox' onChange={handleDarkModeToggle}></input>
+          <input type='checkbox' onChange={handleDarkModeToggle} />
           <span>Dark mode</span>
         </fieldset>
 
