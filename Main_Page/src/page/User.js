@@ -15,6 +15,7 @@ class User extends Component {
     this.state = {
       isLoadMore: false,
       videos: [],
+      total: 0,
       keyword: '',
       currentVideo: {},
       isSettingsOpen: false,
@@ -39,8 +40,7 @@ class User extends Component {
         }
       )
       .then((body) => {
-        console.log(body);
-        this.setState({ videos: body.data });
+        this.setState({ videos: body.data.videos, total: body.data.total });
       })
       .catch((err) => {
         console.log(err);
@@ -70,7 +70,10 @@ class User extends Component {
         axios
           .post(
             `https://localhost:4611/resource/lazyload`,
-            { email: this.props.profile.email },
+            {
+              email: this.props.profile.email,
+              numOfCards: this.state.videos.length,
+            },
             {
               headers: {
                 Authorization: `accessToken=Bearer ${this.props.accessToken}`,
@@ -78,7 +81,6 @@ class User extends Component {
             }
           )
           .then((body) => {
-            console.log(body);
             let propVideos = this.state.videos.concat(body.data);
             this.setState({ videos: propVideos, isLoadMore: false });
           })
@@ -129,7 +131,11 @@ class User extends Component {
         <SearchBar handleKeywordUpdate={this.handleKeywordUpdate} />
         <div className="videoList">
           {videos.length ? (
-            <VideoList videos={videos} profile={this.props.profile} />
+            <VideoList
+              videos={videos}
+              profile={this.props.profile}
+              total={this.state.total}
+            />
           ) : null}
         </div>
         <Settings

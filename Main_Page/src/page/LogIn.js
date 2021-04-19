@@ -11,19 +11,18 @@ class Login extends Component {
   constructor(props) {
     super(props);
   }
-  handleAuthSuccess = ({code}) => {
-console.log(code)
+  handleAuthSuccess = ({ code }) => {
+    console.log(code);
     axios
       .post('https://localhost:4611/auth/login', { authCode: code })
-      .then(res => {
-        
-        const { email, name, picture, accessToken,refreshToken } = res.data;
-        console.log(res.data)
+      .then((res) => {
+        const { email, name, picture, accessToken, refreshToken } = res.data;
+        console.log(res.data);
         this.props.handleLoginToggle(accessToken, refreshToken);
         this.props.handleProfileUpdate({ email, name, picture });
         this.props.history.push('/user');
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.error);
         return;
       });
@@ -44,8 +43,8 @@ console.log(code)
             className="button"
             type="button"
             buttonText="Sign in with Google"
-            cookiePolicy={ 'single_host_origin' }
-            clientId="176713763841-ubebta3hn7miiai19ot8h10tfllq6gdj.apps.googleusercontent.com" //client ID는 config.js라는 폴더 안의 동명의 파일 안에 있음.하람님 아이디.
+            cookiePolicy={'single_host_origin'}
+            clientId="795606331997-u7q92vmtdurb1g02f9vmk4vu0arve9vf.apps.googleusercontent.com" //client ID는 config.js라는 폴더 안의 동명의 파일 안에 있음.하람님 아이디.
             onSuccess={this.handleAuthSuccess}
             onFailure={this.handleAuthFailure}
             scope="https://www.googleapis.com/auth/youtube"
