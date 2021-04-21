@@ -1,57 +1,20 @@
-import React from 'react';
-import './Settings.css';
-import logo from '../images/yourtube-small.png';
-
-const Settings = ({
-  profile,
-  isSettingsOpen,
-  isDarkMode,
-  handleLoginToggle,
-  handleSettingsToggle,
-  handleDarkModeToggle,
-}) => {
-  return (
-    <div className={isSettingsOpen ? 'settings show' : 'settings'}>
-      <div className='shadow' onClick={handleSettingsToggle}></div>
-      <div className='sidebar'>
-        <button
-          className={isDarkMode ? 'x-button dark' : 'x-button'}
-          onClick={handleSettingsToggle}>
-          &times;
-        </button>
-        <div className='settings_title'>
-          <div className='settings_title_logo'>
-            <img src={logo} alt='logo' />
-          </div>
-          <h3 className='settings_title_text'>당신의 좋아요 리스트</h3>
-        </div>
-
-        <hr />
-        <div className='settings_profile'>
-          <div className='settings_profile_image'>
-            <img src={profile.picture} alt='profile image' />
-          </div>
-          <div className='settings_profile_text'>
-            <h3 className='settings_profile_name'>{profile.name}</h3>
-            <p className='settings_profile_email'>{profile.email}</p>
-          </div>
-        </div>
-
-        <hr />
-        <fieldset>
-          <input type='checkbox' onChange={handleDarkModeToggle}></input>
-          <span>Dark mode</span>
-        </fieldset>
-
-        <hr />
-        <center>
-          <button className='logout-button' onClick={handleLoginToggle}>
-            로그아웃
-          </button>
-        </center>
-      </div>
-    </div>
-  );
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import "../css/Settings.css";
+import small from "../images/yourtube-small.png";
+export const Settings = ({ profile, isSettingsOpen, isDarkMode, handleLoginToggle, handleSettingsToggle, handleDarkModeToggle, }) => {
+    return (_jsxs("div", Object.assign({ className: isSettingsOpen ? "settings show" : "settings" }, { children: [_jsx("div", { className: "shadow", onClick: handleSettingsToggle }, void 0),
+            _jsxs("div", Object.assign({ className: isDarkMode ? "sidebar dark" : "sidebar" }, { children: [_jsx("button", Object.assign({ className: isDarkMode ? "x-button dark" : "x-button", onClick: handleSettingsToggle }, { children: "\u00D7" }), void 0),
+                    _jsxs("div", Object.assign({ className: "settings_title" }, { children: [_jsx("div", Object.assign({ className: "settings_title_logo" }, { children: _jsx("img", { src: small, alt: "logo" }, void 0) }), void 0),
+                            _jsx("h3", Object.assign({ className: "settings_title_text" }, { children: "\uB2F9\uC2E0\uC758 \uC88B\uC544\uC694 \uB9AC\uC2A4\uD2B8" }), void 0)] }), void 0),
+                    _jsx("hr", {}, void 0),
+                    _jsxs("div", Object.assign({ className: "settings_profile" }, { children: [_jsx("div", Object.assign({ className: "settings_profile_image" }, { children: _jsx("img", { src: profile.picture, alt: "profile image" }, void 0) }), void 0),
+                            _jsxs("div", Object.assign({ className: "settings_profile_text" }, { children: [_jsx("h3", Object.assign({ className: "settings_profile_name" }, { children: profile.name }), void 0),
+                                    _jsx("p", Object.assign({ className: "settings_profile_email" }, { children: profile.email }), void 0)] }), void 0)] }), void 0),
+                    _jsx("hr", {}, void 0),
+                    _jsxs("fieldset", { children: [_jsx("input", { type: "checkbox", onChange: handleDarkModeToggle }, void 0),
+                            _jsx("span", { children: "Dark mode" }, void 0)] }, void 0),
+                    _jsx("hr", {}, void 0),
+                    _jsx("div", { children: _jsx("button", Object.assign({ className: isDarkMode ? "logout-button dark" : "logout-button", onClick: handleLoginToggle }, { children: "\uB85C\uADF8\uC544\uC6C3" }), void 0) }, void 0)] }), void 0)] }), void 0));
 };
-
 export default Settings;
+//# sourceMappingURL=Settings.js.map

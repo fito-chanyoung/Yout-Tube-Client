@@ -1,0 +1,46 @@
+.contents {
+  width: 780px;
+  height: 250px;
+  background-color: whitesmoke;
+  border-bottom: 1px solid rgb(50, 50, 50);
+  display: flex;
+}
+
+.thumbnail-img {
+  align-content: center;
+  max-width: 250px;
+}
+
+.textdata {
+  margin-left: 2vw;
+  align-self: center;
+}
+
+.whosid {
+  position: relative;
+  text-align: center;
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+}
+.img-container {
+  display: grid;
+  align-content: center;
+}
+
+.end {
+  height: 10vh;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: large;
+  font-weight: bold;
+}
+
+.darkmode {
+  background-color: #333333;
+  color: rgb(150, 150, 150);
+}

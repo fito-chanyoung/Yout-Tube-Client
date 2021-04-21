@@ -1,0 +1,60 @@
+@font-face {
+  font-family: Roboto-Regular;
+  src: url("../assets/youtube/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Roboto-Thin;
+  src: url("../assets/youtube/Roboto-Thin.ttf") format("truetype");
+}
+
+.HeaderLogo {
+  left: 25%;
+  max-height: 15vh;
+
+  margin-top: 3%;
+}
+
+.Logo {
+  font-family: Roboto-Regular;
+  width: 50vw;
+}
+
+.modalButton {
+  margin-top: 10px;
+  margin-right: 15px;
+  padding: 0px;
+  float: right;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.modalButton.darkMode {
+  color: white;
+}
+
+.darkMode {
+  background-color: #333333 !important;
+  color: rgb(150, 150, 150) !important;
+}
+.YourTube {
+  margin-right: 32px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  font-size: 29px;
+  display: flex;
+  align-items: center;
+}
+.YourTube.darkMode {
+  color: white;
+}
+.logo-container {
+  width: 50vw;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+.logo-detail {
+}
