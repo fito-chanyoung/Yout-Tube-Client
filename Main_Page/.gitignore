@@ -26,3 +26,7 @@ yarn-error.log*
 .vscode
 .env
 *lock.json
+.sass-cache/
+.storybook/
+dist/
+index.html

@@ -1,0 +1,68 @@
+@font-face {
+  font-family: Roboto-Black;
+  src: url("../assets/youtube/Roboto-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Roboto-Thin;
+  src: url("../assets/youtube/Roboto-Thin.ttf") format("truetype");
+}
+
+.container {
+  height: 720px;
+  width: 100%;
+  background-color: teal;
+  position: relative;
+}
+
+.s4 {
+  height: 100%;
+  width: 100%;
+  /*여기서 반투명 레이어를 씌워서 자극을 완화했다. 한가지 주목할 점은 youtube글자의 검은색으로 반투명 레이어를 씌우니 글자에는 영향이 가지 않고 배경에만 영향이 갔다. 새로운 기법을 터득했다. */
+  -webkit-backdrop-filter: opacity(0.9) drop-shadow(0 0 0 black);
+  filter: opacity(0.9) drop-shadow(0 0 0 black);
+}
+
+.left-sector {
+  height: 720px;
+  width: 60%;
+  float: left;
+  background-color: whitesmoke;
+}
+
+.right-sector {
+  height: 720px;
+  width: 40%;
+  float: right;
+  background-color: white;
+  justify-content: center;
+}
+
+.comment {
+  margin-top: 40%;
+  width: 100%;
+  font-family: Roboto-Thin;
+  font-size: 50px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.comment2 {
+  margin-top: 5%;
+  width: 100%;
+  font-family: Roboto-Black;
+  font-size: 20px;
+  color: #333333;
+  line-height: 1;
+  text-align: center;
+}
+
+.button {
+  margin: 0;
+  position: absolute;
+  top: 55%;
+  left: 80%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}

@@ -6,21 +6,55 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "chalk": "^4.0.0",
     "https": "^1.0.0",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-bootstrap-sidebar": "0.0.1",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.20",
+    "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "storybook": "^6.1.21",
+    "typescript": "^4.2.4"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "useTabs": false,
+    "tabWidth": 2,
+    "bracketSpacing": true,
+    "semi": true,
+    "singleQuote": false
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.13",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-controls": "^6.1.21",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/node-logger": "^6.2.8",
+    "@storybook/preset-create-react-app": "^3.1.7",
+    "@storybook/react": "^6.2.8",
+    "@types/react-router-dom": "^5.1.7",
+    "babel-loader": "^8.1.0",
+    "bable-loader": "^0.0.1-security",
+    "file-loader": "^6.1.1",
+    "lit-html": "^1.3.0",
+    "ts-loader": "^8.1.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=./cert.pem SSL_KEY_FILE=./key.pem react-scripts start",
-    "build": "react-scripts build",
+    "start": "webpack-dev-server --https --cert ./cert.pem --key ./key.pem",
+    "build": "webpack",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mkbucket": "aws s3 mb s3://$npm_package_config_BUCKETNAME",
@@ -28,14 +62,26 @@
     "lsbucket": "aws s3 ls",
     "uploadObj": "aws s3 sync ./build s3://$npm_package_config_BUCKETNAME",
     "lsObj": "aws s3 ls s3://$npm_package_config_BUCKETNAME",
-    "rmObj": "aws s3 rm s3://$npm_package_config_BUCKETNAME *"
+    "rmObj": "aws s3 rm s3://$npm_package_config_BUCKETNAME *",
+    "storybook": "tsc --watch & webpack & sass --watch src/sass:src/css & start-storybook -p 6006 -s ./public & npm start",
+    "build-storybook": "build-storybook -s public"
   },
   "homepage": "./",
   "config": {
     "BUCKETNAME": "yourtube.cysong.net"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [

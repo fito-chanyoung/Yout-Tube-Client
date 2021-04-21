@@ -1,84 +1,51 @@
-import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import Login from './page/Login';
-import User from './page/User';
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false,
-      profile: {},
-      acc_token: '',
-      ref_token: '',
-    };
-  }
-
-  // componentDidMount() {
-  //   window.addEventListener('scroll', handler);
-  //   function handler(e) {
-  //     console.log(
-  //       e.target.scrollHeight - e.target.scrollTop,
-  //       e.target.clientHeight
-  //     );
-  //   }
-  // }
-  handleLoginToggle = (acc, ref) => {
-    this.setState({
-      isLogin: !this.state.isLogin,
-      acc_token: acc,
-      ref_token: ref,
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { Login } from "./page/Login";
+import { User } from "./page/User";
+export const App = () => {
+    const [isLogin, loginToggle] = useState(false);
+    const [profile, profileHandler] = useState({
+        email: "",
+        name: "",
+        picture: "",
+        refreshToken: "",
+        accessToken: "",
     });
-  };
-  handleProfileUpdate = (data) => {
-    this.setState({ profile: data });
-  };
-  render() {
-    const { isLogin, profile, storage } = this.state;
-
-    return (
-      <div>
-        <Switch>
-          <Route
-            exact
-            path="/login"
-            render={() => (
-              <Login
-                handleLoginToggle={this.handleLoginToggle.bind(this)}
-                handleProfileUpdate={this.handleProfileUpdate}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/user"
-            render={() => {
-              if (isLogin) {
-                return (
-                  <User
-                    handleLoginToggle={this.handleLoginToggle.bind(this)}
-                    profile={profile}
-                    accessToken={this.state.acc_token}
-                    refreshToken={this.state.ref_token}
-                  />
-                );
-              }
-              return <Redirect to="/login" />;
-            }}
-          />
-          <Route
-            path="/"
-            render={() => {
-              if (isLogin) {
-                return <Redirect to="/user" />;
-              }
-              return <Redirect to="/login" />;
-            }}
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
-
+    const [acc_token, accTokenHandler] = useState("");
+    const [ref_token, refTokenHandler] = useState("");
+    // componentDidMount() {
+    //   window.addEventListener('scroll', handler);
+    //   function handler(e) {
+    //     console.log(
+    //       e.target.scrollHeight - e.target.scrollTop,
+    //       e.target.clientHeight
+    //     );
+    //   }
+    // }
+    const handleLoginToggle = (acc, ref) => {
+        // this.setState({
+        //   isLogin: !this.state.isLogin,
+        //   acc_token: acc,
+        //   ref_token: ref,
+        // });
+        loginToggle(!isLogin);
+        accTokenHandler(acc);
+        refTokenHandler(ref);
+    };
+    return (_jsx("div", { children: _jsxs(Switch, { children: [_jsx(Route, { exact: true, path: "/login", render: () => (_jsx(Login, { handleLoginToggle: handleLoginToggle, handleProfileUpdate: profileHandler }, void 0)) }, void 0),
+                _jsx(Route, { exact: true, path: "/user", render: () => {
+                        if (isLogin) {
+                            return (_jsx(User, { handleLoginToggle: loginToggle, profile: profile, accessToken: acc_token, refreshToken: ref_token }, void 0));
+                        }
+                        return _jsx(Redirect, { to: "/login" }, void 0);
+                    } }, void 0),
+                _jsx(Route, { path: "/", render: () => {
+                        if (isLogin) {
+                            return _jsx(Redirect, { to: "/user" }, void 0);
+                        }
+                        return _jsx(Redirect, { to: "/login" }, void 0);
+                    } }, void 0)] }, void 0) }, void 0));
+};
 export default App;
+//# sourceMappingURL=App.js.map

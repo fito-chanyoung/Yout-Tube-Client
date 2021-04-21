@@ -1,33 +1,28 @@
 @font-face {
   font-family: Roboto-Regular;
-  src: url('./youtube/Roboto-Regular.ttf');
-}
-
+  src: url("../assets/youtube/Roboto-Regular.ttf") format("truetype"); }
 @font-face {
   font-family: Roboto-Thin;
-  src: url('./youtube/Roboto-Thin.ttf');
-}
-
+  src: url("../assets/youtube/Roboto-Thin.ttf") format("truetype"); }
 .HeaderLogo {
   float: left;
   position: absolute;
   left: 25%;
   width: 50px;
-  margin-top: 3%;
-}
+  margin-top: 3%; }
 
 .Logo {
   position: relative;
   left: 29%;
   margin-top: 2.8%;
   font-family: Roboto-Regular;
-  width: 60px;
-}
+  width: 60px; }
 
 .modalButton {
   position: relative;
   right: 20%;
   margin-top: -5.5%;
   font-size: 20pt;
-  font-family: Roboto-Thin;
-}
+  font-family: Roboto-Thin; }
+
+/*# sourceMappingURL=Header.css.map */
