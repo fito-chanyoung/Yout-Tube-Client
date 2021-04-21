@@ -22,6 +22,7 @@ export const App: React.FC<{}> = () => {
   });
   const [acc_token, accTokenHandler] = useState("");
   const [ref_token, refTokenHandler] = useState("");
+  const [isDarkMode, darkmodeHandler] = useState(false);
 
   // componentDidMount() {
   //   window.addEventListener('scroll', handler);
@@ -44,7 +45,7 @@ export const App: React.FC<{}> = () => {
   };
 
   return (
-    <div>
+    <div className={isDarkMode ? "darkmode" : ""}>
       <Switch>
         <Route
           exact
@@ -67,6 +68,8 @@ export const App: React.FC<{}> = () => {
                   profile={profile}
                   accessToken={acc_token}
                   refreshToken={ref_token}
+                  isDarkMode={isDarkMode}
+                  darkModeToggler={darkmodeHandler}
                 />
               );
             }

@@ -2,27 +2,40 @@ import React from "react";
 
 import "../css/Header.css";
 import { useHistory } from "react-router-dom";
-
+import small from "../images/yourtube-small.png";
 export interface HeaderProps {
   handleSettingsToggle: React.MouseEventHandler<HTMLButtonElement>;
+  isDarkMode: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({ handleSettingsToggle }) => {
+export const Header: React.FC<HeaderProps> = ({
+  handleSettingsToggle,
+  isDarkMode,
+}) => {
   let history = useHistory();
   return (
     <div>
-      <div className="YourTube">
-        <img
-          src="../images/yourtube-small.png"
-          alt="YoutubeLogo"
-          className="HeaderLogo"
-          onClick={() => {
-            history.push("/user");
-          }}
-        />
-        <h3 className="Logo">YourTube</h3>
+      <div className={isDarkMode ? "YourTube darkmode" : "YourTube"}>
+        <div
+          className={isDarkMode ? "logo-container darkmode" : "logo-container"}
+        >
+          <img
+            src={small}
+            alt="YoutubeLogo"
+            className="HeaderLogo"
+            onClick={() => {
+              history.push("/user");
+            }}
+          />
+        </div>
+        <div className="Logo">
+          <h3 className="logo-detail">YourTube</h3>
+        </div>
       </div>
-      <button className="modalButton" onClick={handleSettingsToggle}>
+      <button
+        className={isDarkMode ? "modalButton darkMode" : "modalButton"}
+        onClick={handleSettingsToggle}
+      >
         &#8801; Settings
       </button>
     </div>

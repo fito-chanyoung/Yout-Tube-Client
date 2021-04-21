@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, StrictMode } from "react";
+import tslib from "tslib";
 import axios from "axios";
 import VideoList from "../components/VideoList";
 import { Settings } from "./Settings";
@@ -14,6 +15,8 @@ export interface UserProps {
   profile: profileInterface;
   accessToken: string;
   refreshToken: string;
+  isDarkMode: boolean;
+  darkModeToggler: Function;
 }
 
 export const User: React.FC<UserProps> = ({
@@ -21,6 +24,8 @@ export const User: React.FC<UserProps> = ({
   profile,
   accessToken,
   refreshToken,
+  isDarkMode,
+  darkModeToggler,
 }) => {
   const [isLoadMore, isLoadToggle] = useState(false);
   const [isSearched, toggleSearch] = useState(false);
@@ -30,7 +35,7 @@ export const User: React.FC<UserProps> = ({
   const [keyword, keywordHandler] = useState("");
   const [currentVideo, currentVideoHandler] = useState({});
   const [isSettingsOpen, settingHandler] = useState(false);
-  const [isDarkMode, darkmodeHandler] = useState(false);
+
   const keywordCallback = useCallback(
     (keyword) => {
       // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
@@ -142,14 +147,15 @@ export const User: React.FC<UserProps> = ({
   // }
   const handleDarkModeToggle = () => {
     //this.setState({ isDarkMode: !this.state.isDarkMode });
-    darkmodeHandler(!isDarkMode);
+    console.log("etst");
+    darkModeToggler(!isDarkMode);
   };
   const handleSettingsToggle = () => {
     //this.setState({ isSettingsOpen: !this.state.isSettingsOpen });
     settingHandler(!isSettingsOpen);
   };
   const handleKeywordUpdate = async (value: string) => {
-    await keywordHandler(value);
+    keywordHandler(value);
     keywordCallback(keyword);
   };
   const makeDefault = async () => {
@@ -174,13 +180,24 @@ export const User: React.FC<UserProps> = ({
     isLoadToggle(false);
   };
   return (
-    <div>
-      <Header handleSettingsToggle={handleSettingsToggle} />
-      <SearchBar handleKeywordUpdate={handleKeywordUpdate} />
+    <div className={isDarkMode ? "darkmode" : ""}>
+      <Header
+        handleSettingsToggle={handleSettingsToggle}
+        isDarkMode={isDarkMode}
+      />
+      <SearchBar
+        handleKeywordUpdate={handleKeywordUpdate}
+        isDarkMode={isDarkMode}
+      />
       {isSearched ? <div onClick={makeDefault}>돌아가기</div> : ""}
       <div className="videoList">
         {videos.length ? (
-          <VideoList videos={videos} profile={profile} total={total} />
+          <VideoList
+            isDarkMode={isDarkMode}
+            videos={videos}
+            profile={profile}
+            total={total}
+          />
         ) : null}
       </div>
       <Settings

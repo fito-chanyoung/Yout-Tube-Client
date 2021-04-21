@@ -14,6 +14,7 @@ export const App = () => {
     });
     const [acc_token, accTokenHandler] = useState("");
     const [ref_token, refTokenHandler] = useState("");
+    const [isDarkMode, darkmodeHandler] = useState(false);
     // componentDidMount() {
     //   window.addEventListener('scroll', handler);
     //   function handler(e) {
@@ -33,10 +34,10 @@ export const App = () => {
         accTokenHandler(acc);
         refTokenHandler(ref);
     };
-    return (_jsx("div", { children: _jsxs(Switch, { children: [_jsx(Route, { exact: true, path: "/login", render: () => (_jsx(Login, { handleLoginToggle: handleLoginToggle, handleProfileUpdate: profileHandler }, void 0)) }, void 0),
+    return (_jsx("div", Object.assign({ className: isDarkMode ? "darkmode" : "" }, { children: _jsxs(Switch, { children: [_jsx(Route, { exact: true, path: "/login", render: () => (_jsx(Login, { handleLoginToggle: handleLoginToggle, handleProfileUpdate: profileHandler }, void 0)) }, void 0),
                 _jsx(Route, { exact: true, path: "/user", render: () => {
                         if (isLogin) {
-                            return (_jsx(User, { handleLoginToggle: loginToggle, profile: profile, accessToken: acc_token, refreshToken: ref_token }, void 0));
+                            return (_jsx(User, { handleLoginToggle: loginToggle, profile: profile, accessToken: acc_token, refreshToken: ref_token, isDarkMode: isDarkMode, darkModeToggler: darkmodeHandler }, void 0));
                         }
                         return _jsx(Redirect, { to: "/login" }, void 0);
                     } }, void 0),
@@ -45,7 +46,7 @@ export const App = () => {
                             return _jsx(Redirect, { to: "/user" }, void 0);
                         }
                         return _jsx(Redirect, { to: "/login" }, void 0);
-                    } }, void 0)] }, void 0) }, void 0));
+                    } }, void 0)] }, void 0) }), void 0));
 };
 export default App;
 //# sourceMappingURL=App.js.map

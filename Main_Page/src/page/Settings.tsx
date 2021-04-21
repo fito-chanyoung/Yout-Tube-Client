@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/Settings.css";
 import { profileInterface } from "../App";
+import small from "../images/yourtube-small.png";
 
 export interface SettingProps {
   profile: profileInterface;
@@ -24,7 +25,7 @@ export const Settings: React.FC<SettingProps> = ({
   return (
     <div className={isSettingsOpen ? "settings show" : "settings"}>
       <div className="shadow" onClick={handleSettingsToggle} />
-      <div className="sidebar">
+      <div className={isDarkMode ? "sidebar dark" : "sidebar"}>
         <button
           className={isDarkMode ? "x-button dark" : "x-button"}
           onClick={handleSettingsToggle}
@@ -33,7 +34,7 @@ export const Settings: React.FC<SettingProps> = ({
         </button>
         <div className="settings_title">
           <div className="settings_title_logo">
-            <img src="../images/yourtube-small.png" alt="logo" />
+            <img src={small} alt="logo" />
           </div>
           <h3 className="settings_title_text">당신의 좋아요 리스트</h3>
         </div>
@@ -57,7 +58,10 @@ export const Settings: React.FC<SettingProps> = ({
 
         <hr />
         <div>
-          <button className="logout-button" onClick={handleLoginToggle}>
+          <button
+            className={isDarkMode ? "logout-button dark" : "logout-button"}
+            onClick={handleLoginToggle}
+          >
             로그아웃
           </button>
         </div>

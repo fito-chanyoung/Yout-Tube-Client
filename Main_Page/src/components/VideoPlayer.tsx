@@ -14,7 +14,7 @@ export const VideoPlayer: React.FC<PlayerProps> = ({
   const { videoId, title, description, channelId } = currentVideo;
 
   return (
-    <div className={darkMode ? "VideoPlayer darkMode" : "VideoPlayer"}>
+    <div className={darkMode ? "VideoPlayer darkmode" : "VideoPlayer"}>
       <div>
         <button
           onClick={handleRemoveVideoPlayer}

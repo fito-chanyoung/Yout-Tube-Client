@@ -1,0 +1,31 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.SearchBar {
+  width: 40%;
+  height: 30px;
+  font-size: 14px;
+}
+
+.darkmode {
+  background: #333333 !important;
+  color: rgb(150, 150, 150) !important;
+}
+
+.SearchButton {
+  width: 40px;
+  height: 30px;
+  background-color: #666666;
+  color: white;
+  transition: 0.4s;
+  margin-left: 1vw;
+}
+
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

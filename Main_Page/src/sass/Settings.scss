@@ -1,6 +1,6 @@
 .dark {
-  color: white;
-  background: #333333;
+  color: rgb(150, 150, 150) !important;
+  background: #333333 !important;
 }
 
 .show {
@@ -48,6 +48,10 @@
 .settings.show .sidebar {
   transform: translateX(0);
 }
+.sidebar.dark {
+  color: rgb(150, 150, 150) !important;
+  background: #333333 !important;
+}
 
 .x-button {
   font-size: 25px;
@@ -55,6 +59,10 @@
   color: gray;
   background: none;
   border: none;
+}
+.x-button.dark {
+  color: white !important;
+  background: #333333 !important;
 }
 
 .logout-button {

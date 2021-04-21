@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import "../css/searchbar.css";
 export interface SearchBarProps {
   handleKeywordUpdate: Function;
+  isDarkMode: boolean;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   handleKeywordUpdate,
+  isDarkMode,
 }) => {
   const [value, valueHandler] = useState("");
 
@@ -17,14 +20,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     handleKeywordUpdate(value);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div
+      className={isDarkMode ? "search-container darkmode" : "search-container"}
+    >
+      <form className="search-form" onSubmit={handleSubmit}>
         <input
-          className="SearchtBar"
+          className={isDarkMode ? "SearchBar darkmode" : "SearchBar"}
           placeholder="찾고 싶은 영상의 제목이나 단어를 입력하세요"
           onChange={handleInputValueChange}
         />
-        <button type="submit" className="SearchtButton">
+        <button
+          type="submit"
+          className={isDarkMode ? "SearchButton darkMode" : "SearchButton"}
+        >
           검색
         </button>
       </form>

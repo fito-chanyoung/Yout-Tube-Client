@@ -8,30 +8,34 @@ export interface VideoListProps {
   videos: any;
   total: number;
   profile: profileInterface;
+  isDarkMode: boolean;
 }
 
 export const VideoList: React.FC<VideoListProps> = ({
   videos,
   total,
   profile,
+  isDarkMode,
 }) => {
   return (
     <>
       <h3 className="whosid">{profile.name}님의 좋아요 동영상 리스트입니다.</h3>
       <div className="media">
         {videos.length !== total ? (
-          <ul>
+          <div>
             {videos.map((video: any) => (
-              <Video key={video.id} video={video} />
+              <Video key={video.id} video={video} isDarkMode={isDarkMode} />
             ))}
-          </ul>
+          </div>
         ) : (
-          <ul>
+          <div>
             {videos.map((video: any) => (
-              <Video key={video.id} video={video} />
+              <Video key={video.id} video={video} isDarkMode={isDarkMode} />
             ))}
-            <div>더이상의 동영상이 없습니다.</div>
-          </ul>
+            <div className="end">
+              <div>더이상의 동영상이 없습니다.</div>
+            </div>
+          </div>
         )}
       </div>
     </>
