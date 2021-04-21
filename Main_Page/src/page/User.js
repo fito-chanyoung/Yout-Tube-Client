@@ -18,6 +18,7 @@ import { SearchBar } from "../components/SearchBar";
 axios.defaults.withCredentials = true;
 export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, }) => {
     const [isLoadMore, isLoadToggle] = useState(false);
+    const [isSearched, toggleSearch] = useState(false);
     const [loadCount, countHandler] = useState(0);
     const [videos, videosHandler] = useState([]);
     const [total, totalHandler] = useState(0);
@@ -28,9 +29,11 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, })
     const keywordCallback = useCallback((keyword) => {
         // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
         console.log("keyword changed");
+        toggleSearch(true);
         axios
             .post("https://localhost:4611/resource/search", {
             keyword: keyword,
+            email: profile.email,
         })
             .then((body) => {
             console.log(body);
@@ -97,7 +100,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, })
         const html = document.documentElement;
         const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
         const windowBottom = windowHeight + window.pageYOffset;
-        if (windowBottom >= docHeight && !isLoadMore) {
+        if (windowBottom >= docHeight && !isLoadMore && !isSearched) {
             if (accessToken) {
                 // this.setState({ isLoadMore: true });
                 console.log(loadCount);
@@ -125,8 +128,25 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, })
         yield keywordHandler(value);
         keywordCallback(keyword);
     });
+    const makeDefault = () => __awaiter(void 0, void 0, void 0, function* () {
+        toggleSearch(false);
+        let response = yield axios.post("https://localhost:4611/resource", {
+            email: profile.email,
+            picture: profile.picture,
+            name: profile.name,
+            refreshToken: refreshToken,
+        }, {
+            headers: {
+                Authorization: `accessToken=Bearer ${accessToken}`,
+            },
+        });
+        console.log(response.data);
+        videosHandler(response.data.videos);
+        isLoadToggle(false);
+    });
     return (_jsxs("div", { children: [_jsx(Header, { handleSettingsToggle: handleSettingsToggle }, void 0),
             _jsx(SearchBar, { handleKeywordUpdate: handleKeywordUpdate }, void 0),
+            isSearched ? _jsx("div", Object.assign({ onClick: makeDefault }, { children: "\uB3CC\uC544\uAC00\uAE30" }), void 0) : "",
             _jsx("div", Object.assign({ className: "videoList" }, { children: videos.length ? (_jsx(VideoList, { videos: videos, profile: profile, total: total }, void 0)) : null }), void 0),
             _jsx(Settings, { profile: profile, isSettingsOpen: isSettingsOpen, isDarkMode: isDarkMode, handleLoginToggle: handleLoginToggle, handleSettingsToggle: handleSettingsToggle, handleDarkModeToggle: handleDarkModeToggle }, void 0)] }, void 0));
 };

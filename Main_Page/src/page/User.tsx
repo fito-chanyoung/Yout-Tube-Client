@@ -23,6 +23,7 @@ export const User: React.FC<UserProps> = ({
   refreshToken,
 }) => {
   const [isLoadMore, isLoadToggle] = useState(false);
+  const [isSearched, toggleSearch] = useState(false);
   const [loadCount, countHandler] = useState(0);
   const [videos, videosHandler] = useState([]);
   const [total, totalHandler] = useState(0);
@@ -34,9 +35,11 @@ export const User: React.FC<UserProps> = ({
     (keyword) => {
       // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
       console.log("keyword changed");
+      toggleSearch(true);
       axios
         .post("https://localhost:4611/resource/search", {
           keyword: keyword,
+          email: profile.email,
         })
         .then((body) => {
           console.log(body);
@@ -121,7 +124,7 @@ export const User: React.FC<UserProps> = ({
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight && !isLoadMore) {
+    if (windowBottom >= docHeight && !isLoadMore && !isSearched) {
       if (accessToken) {
         // this.setState({ isLoadMore: true });
         console.log(loadCount);
@@ -149,11 +152,32 @@ export const User: React.FC<UserProps> = ({
     await keywordHandler(value);
     keywordCallback(keyword);
   };
+  const makeDefault = async () => {
+    toggleSearch(false);
 
+    let response = await axios.post(
+      "https://localhost:4611/resource",
+      {
+        email: profile.email,
+        picture: profile.picture,
+        name: profile.name,
+        refreshToken: refreshToken,
+      },
+      {
+        headers: {
+          Authorization: `accessToken=Bearer ${accessToken}`,
+        },
+      }
+    );
+    console.log(response.data);
+    videosHandler(response.data.videos);
+    isLoadToggle(false);
+  };
   return (
     <div>
       <Header handleSettingsToggle={handleSettingsToggle} />
       <SearchBar handleKeywordUpdate={handleKeywordUpdate} />
+      {isSearched ? <div onClick={makeDefault}>돌아가기</div> : ""}
       <div className="videoList">
         {videos.length ? (
           <VideoList videos={videos} profile={profile} total={total} />
