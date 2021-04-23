@@ -1,3 +1,139 @@
+@import "./mixin";
+
+@include mobile {
+  .modal-desc {
+    display: none;
+  }
+  .header-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .HeaderLogo {
+    left: 25%;
+    max-height: 15vh;
+  }
+  .YourTube {
+    margin-right: 32px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-container {
+    width: 20vw;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .logo-detail {
+    display: none;
+  }
+
+  .modalButton {
+    margin-top: 10px;
+    margin-right: 15px;
+    padding: 0px;
+    float: right;
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 10vh;
+    font-weight: bolder;
+  }
+}
+
+@include tablet {
+  .HeaderLogo {
+    left: 25%;
+    max-height: 15vh;
+  }
+
+  .Logo {
+    font-family: Roboto-Regular;
+    width: 50vw;
+  }
+
+  .modalButton {
+    margin-top: 10px;
+    margin-right: 15px;
+    padding: 0px;
+    float: right;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bolder;
+  }
+
+  .darkMode {
+    background-color: #333333 !important;
+    color: rgb(150, 150, 150) !important;
+  }
+  .YourTube {
+    margin-right: 32px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-container {
+    width: 50vw;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  }
+}
+
+@include desktop {
+  .HeaderLogo {
+    left: 25%;
+    max-height: 15vh;
+  }
+
+  .Logo {
+    font-family: Roboto-Regular;
+    width: 50vw;
+  }
+
+  .modalButton {
+    margin-top: 10px;
+    margin-right: 15px;
+    padding: 0px;
+    float: right;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bolder;
+  }
+
+  .darkMode {
+    background-color: #333333 !important;
+    color: rgb(150, 150, 150) !important;
+  }
+  .YourTube {
+    margin-right: 32px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+  }
+  .YourTube.darkMode {
+    color: white;
+  }
+  .logo-container {
+    width: 50vw;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  }
+}
+
 @font-face {
   font-family: Roboto-Regular;
   src: url("../assets/youtube/Roboto-Regular.ttf") format("truetype");
@@ -6,55 +142,4 @@
 @font-face {
   font-family: Roboto-Thin;
   src: url("../assets/youtube/Roboto-Thin.ttf") format("truetype");
-}
-
-.HeaderLogo {
-  left: 25%;
-  max-height: 15vh;
-
-  margin-top: 3%;
-}
-
-.Logo {
-  font-family: Roboto-Regular;
-  width: 50vw;
-}
-
-.modalButton {
-  margin-top: 10px;
-  margin-right: 15px;
-  padding: 0px;
-  float: right;
-  background: none;
-  border: none;
-  font-size: 16px;
-  font-weight: bolder;
-}
-
-.modalButton.darkMode {
-  color: white;
-}
-
-.darkMode {
-  background-color: #333333 !important;
-  color: rgb(150, 150, 150) !important;
-}
-.YourTube {
-  margin-right: 32px;
-  padding-top: 30px;
-  padding-bottom: 10px;
-  font-size: 29px;
-  display: flex;
-  align-items: center;
-}
-.YourTube.darkMode {
-  color: white;
-}
-.logo-container {
-  width: 50vw;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-}
-.logo-detail {
 }

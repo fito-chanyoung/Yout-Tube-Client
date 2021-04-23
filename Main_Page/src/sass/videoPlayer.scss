@@ -1,0 +1,64 @@
+@import "./mixin";
+
+@include mobile {
+  .VideoPlayer {
+    margin: 2% 35% 0px 35%;
+  }
+
+  .VideoPlayer.darkMode {
+    color: white;
+  }
+}
+@include tablet {
+  .VideoPlayer {
+    display: flex;
+  }
+
+  .VideoPlayer.darkMode {
+    color: white;
+  }
+
+  .iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+
+  iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .video-desc {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@include desktop {
+  .VideoPlayer {
+    display: flex;
+  }
+
+  .VideoPlayer.darkMode {
+    color: white;
+  }
+
+  .iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+
+  iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .video-desc {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -25,6 +25,11 @@ module.exports = {
       // .ts나 .tsx 확장자를 ts-loader가 트랜스파일
       { test: /\.tsx?$/, exclude: /node_modules/, loader: "ts-loader" },
       {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+        include: path.resolve(__dirname, "../"),
+      },
+      {
         test: /\.(jpg|jpeg|gif|png|svg|ico)?$/,
         use: [
           {

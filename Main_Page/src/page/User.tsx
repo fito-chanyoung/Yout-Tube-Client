@@ -6,10 +6,24 @@ import { Settings } from "./Settings";
 import { Header } from "../components/Header";
 import { SearchBar } from "../components/SearchBar";
 import { profileInterface } from "../App";
-// import VideoPlayer from './VideoPlayer';
+
+import "../css/user.css";
+import { VideoPlayer } from "../components/VideoPlayer";
+import { useHistory } from "react-router";
 
 axios.defaults.withCredentials = true;
 
+export type videoInterface = {
+  id: number;
+  etag: string;
+  videoId: string;
+  channelId: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  createdAt: string;
+  updatedAt: string;
+};
 export interface UserProps {
   handleLoginToggle: Function;
   profile: profileInterface;
@@ -30,11 +44,12 @@ export const User: React.FC<UserProps> = ({
   const [isLoadMore, isLoadToggle] = useState(false);
   const [isSearched, toggleSearch] = useState(false);
   const [loadCount, countHandler] = useState(0);
-  const [videos, videosHandler] = useState([]);
+  const [videos, videosHandler] = useState<Array<videoInterface>>([]);
   const [total, totalHandler] = useState(0);
   const [keyword, keywordHandler] = useState("");
-  const [currentVideo, currentVideoHandler] = useState({});
+  const [currentVideo, currentVideoHandler] = useState({} as videoInterface);
   const [isSettingsOpen, settingHandler] = useState(false);
+  const history = useHistory();
 
   const keywordCallback = useCallback(
     (keyword) => {
@@ -158,6 +173,20 @@ export const User: React.FC<UserProps> = ({
     keywordHandler(value);
     keywordCallback(keyword);
   };
+  const handleRemoveVideoPlayer = async (target: any) => {
+    if (target === undefined) {
+      await axios.get(
+        `https://localhost:4611/${profile.email}/${currentVideo.videoId}`
+      );
+      currentVideoHandler({} as videoInterface);
+    } else {
+      const position = videos.findIndex((index) => index.id === target.id);
+      console.log(position);
+      videos.splice(position, 1);
+      videosHandler(videos);
+      totalHandler(total - 1);
+    }
+  };
   const makeDefault = async () => {
     toggleSearch(false);
 
@@ -179,27 +208,59 @@ export const User: React.FC<UserProps> = ({
     videosHandler(response.data.videos);
     isLoadToggle(false);
   };
+
+  const syncHandler = async () => {
+    const response = await axios.get(
+      `https://localhost:4611/resource/sync/${profile.email}`,
+      {
+        headers: {
+          Authorization: `accessToken=Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    totalHandler(total + response.data);
+  };
+
   return (
     <div className={isDarkMode ? "darkmode" : ""}>
-      <Header
-        handleSettingsToggle={handleSettingsToggle}
-        isDarkMode={isDarkMode}
-      />
-      <SearchBar
-        handleKeywordUpdate={handleKeywordUpdate}
-        isDarkMode={isDarkMode}
-      />
-      {isSearched ? <div onClick={makeDefault}>돌아가기</div> : ""}
-      <div className="videoList">
-        {videos.length ? (
-          <VideoList
+      <div className="nav">
+        <Header
+          handleSettingsToggle={handleSettingsToggle}
+          isDarkMode={isDarkMode}
+        />
+        <div className="mobile-hide">
+          <SearchBar
+            handleKeywordUpdate={handleKeywordUpdate}
             isDarkMode={isDarkMode}
-            videos={videos}
-            profile={profile}
-            total={total}
           />
-        ) : null}
+        </div>
       </div>
+      {currentVideo.videoId ? (
+        <div>
+          <VideoPlayer
+            currentVideo={currentVideo}
+            darkMode={isDarkMode}
+            handleRemoveVideoPlayer={handleRemoveVideoPlayer}
+            resetHandler={currentVideoHandler}
+          />
+        </div>
+      ) : (
+        <div className="videoList">
+          {videos.length ? (
+            <VideoList
+              isDarkMode={isDarkMode}
+              videos={videos}
+              profile={profile}
+              total={total}
+              onclickHandler={currentVideoHandler}
+              handleRemovePlayList={handleRemoveVideoPlayer}
+              isSearched={isSearched}
+              makeDefault={makeDefault}
+            />
+          ) : null}
+        </div>
+      )}
       <Settings
         profile={profile}
         isSettingsOpen={isSettingsOpen}
@@ -209,7 +270,11 @@ export const User: React.FC<UserProps> = ({
         }
         handleSettingsToggle={handleSettingsToggle}
         handleDarkModeToggle={handleDarkModeToggle}
+        handleKeywordUpdate={handleKeywordUpdate}
       />
+      <button className="sync" onClick={syncHandler}>
+        목록 싱크
+      </button>
     </div>
   );
 };

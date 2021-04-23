@@ -1,0 +1,39 @@
+@import "./mixin";
+
+@include mobile {
+  .mobile-hide {
+    display: none;
+  }
+  .search-form {
+    display: flex !important;
+  }
+  .SearchButton {
+    display: block !important;
+  }
+  .SearchBar {
+    display: block !important;
+  }
+}
+@include tablet {
+  .mobile-hide {
+    display: block;
+  }
+}
+@include desktop {
+  .mobile-hide {
+    display: block;
+  }
+}
+
+.nav {
+  position: fixed;
+  z-index: 1;
+  background-color: white;
+  top: 0;
+}
+
+.sync {
+  position: fixed;
+  right: 0;
+  bottom: 10%;
+}

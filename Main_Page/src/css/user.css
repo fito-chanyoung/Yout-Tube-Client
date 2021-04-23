@@ -1,0 +1,30 @@
+@media (min-width: 0) and (max-width: 758px) {
+  .mobile-hide {
+    display: none; }
+
+  .search-form {
+    display: flex !important; }
+
+  .SearchButton {
+    display: block !important; }
+
+  .SearchBar {
+    display: block !important; } }
+@media (min-width: 758px) and (max-width: 1024px) {
+  .mobile-hide {
+    display: block; } }
+@media (min-width: 1024px) {
+  .mobile-hide {
+    display: block; } }
+.nav {
+  position: fixed;
+  z-index: 1;
+  background-color: white;
+  top: 0; }
+
+.sync {
+  position: fixed;
+  right: 0;
+  bottom: 10%; }
+
+/*# sourceMappingURL=user.css.map */

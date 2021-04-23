@@ -1,17 +1,34 @@
-.contents {
+@import "./mixin";
+
+@include mobile {
+}
+
+@include tablet {
+}
+
+@include desktop {
+}
+
+.contents-container {
   width: 780px;
   height: 250px;
   background-color: whitesmoke;
   border-bottom: 1px solid rgb(50, 50, 50);
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
-
+.contents {
+  display: flex;
+}
 .thumbnail-img {
   align-content: center;
   max-width: 250px;
 }
 
 .textdata {
+  min-width: 40vw;
+  max-width: 40vw;
   margin-left: 2vw;
   align-self: center;
 }
@@ -43,4 +60,13 @@
 .darkmode {
   background-color: #333333;
   color: rgb(150, 150, 150);
+}
+.list-container {
+  padding-top: 20vh;
+}
+
+.search-revoke {
+  position: fixed;
+  right: 0;
+  bottom: 20%;
 }

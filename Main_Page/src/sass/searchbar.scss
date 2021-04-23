@@ -1,31 +1,100 @@
-.search-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+@import "./mixin";
+
+@include mobile {
+  .search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 4vh;
+  }
+  .SearchBar {
+    display: none;
+    width: 80%;
+    height: 10vh;
+    font-size: 4.5vh;
+  }
+
+  .SearchButton {
+    display: none;
+    width: 10vw;
+    height: 10vh;
+    background-color: #666666;
+    color: white;
+    transition: 0.4s;
+    margin-left: 1vw;
+    font-size: 3vh;
+  }
+
+  .search-form {
+    display: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.SearchBar {
-  width: 40%;
-  height: 30px;
-  font-size: 14px;
+@include tablet {
+  .search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .SearchBar {
+    width: 40%;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .SearchButton {
+    width: 40px;
+    height: 30px;
+    background-color: #666666;
+    color: white;
+    transition: 0.4s;
+    margin-left: 1vw;
+  }
+
+  .search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.darkmode {
-  background: #333333 !important;
-  color: rgb(150, 150, 150) !important;
-}
+@include desktop {
+  .search-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 
-.SearchButton {
-  width: 40px;
-  height: 30px;
-  background-color: #666666;
-  color: white;
-  transition: 0.4s;
-  margin-left: 1vw;
-}
+  .SearchBar {
+    width: 40%;
+    height: 30px;
+    font-size: 14px;
+  }
 
-.search-form {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  .darkmode {
+    background: #333333 !important;
+    color: rgb(150, 150, 150) !important;
+  }
+
+  .SearchButton {
+    width: 40px;
+    height: 30px;
+    background-color: #666666;
+    color: white;
+    transition: 0.4s;
+    margin-left: 1vw;
+  }
+
+  .search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

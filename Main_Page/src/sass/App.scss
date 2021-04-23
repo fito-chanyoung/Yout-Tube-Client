@@ -1,3 +1,14 @@
+@import "./mixin";
+
+@include mobile {
+}
+
+@include tablet {
+}
+
+@include desktop {
+}
+
 .App {
   text-align: center;
 }

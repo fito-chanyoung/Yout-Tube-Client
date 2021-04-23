@@ -9,6 +9,10 @@ export interface VideoListProps {
   total: number;
   profile: profileInterface;
   isDarkMode: boolean;
+  onclickHandler: any;
+  handleRemovePlayList: React.MouseEventHandler<HTMLButtonElement>;
+  isSearched: boolean;
+  makeDefault: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const VideoList: React.FC<VideoListProps> = ({
@@ -16,21 +20,46 @@ export const VideoList: React.FC<VideoListProps> = ({
   total,
   profile,
   isDarkMode,
+  onclickHandler,
+  handleRemovePlayList,
+  isSearched,
+  makeDefault,
 }) => {
   return (
-    <>
+    <div className="list-container">
       <h3 className="whosid">{profile.name}님의 좋아요 동영상 리스트입니다.</h3>
+      <span>
+        {isSearched ? (
+          <button className="search-revoke" onClick={makeDefault}>
+            돌아가기
+          </button>
+        ) : (
+          ""
+        )}
+      </span>
       <div className="media">
         {videos.length !== total ? (
           <div>
             {videos.map((video: any) => (
-              <Video key={video.id} video={video} isDarkMode={isDarkMode} />
+              <Video
+                key={video.id}
+                video={video}
+                isDarkMode={isDarkMode}
+                onclickHandler={onclickHandler}
+                handleRemovePlayList={handleRemovePlayList}
+              />
             ))}
           </div>
         ) : (
           <div>
             {videos.map((video: any) => (
-              <Video key={video.id} video={video} isDarkMode={isDarkMode} />
+              <Video
+                key={video.id}
+                video={video}
+                isDarkMode={isDarkMode}
+                onclickHandler={onclickHandler}
+                handleRemovePlayList={handleRemovePlayList}
+              />
             ))}
             <div className="end">
               <div>더이상의 동영상이 없습니다.</div>
@@ -38,7 +67,7 @@ export const VideoList: React.FC<VideoListProps> = ({
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
