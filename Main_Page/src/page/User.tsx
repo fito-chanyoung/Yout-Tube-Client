@@ -54,16 +54,13 @@ export const User: React.FC<UserProps> = ({
   const keywordCallback = useCallback(
     (keyword) => {
       // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
-      console.log("keyword changed");
       toggleSearch(true);
       axios
-        .post("https://yourtubeback.cysong.net:4611/resource/search", {
+        .post("https://localhost:4611/resource/search", {
           keyword: keyword,
           email: profile.email,
         })
         .then((body) => {
-          console.log(body);
-          // this.setState({ videos: body.data });
           videosHandler(body.data);
         })
         .catch((err) => {
@@ -76,7 +73,7 @@ export const User: React.FC<UserProps> = ({
     if (videos.length === 0)
       axios
         .post(
-          "https://yourtubeback.cysong.net:4611/resource",
+          "https://localhost:4611/resource",
           {
             email: profile.email,
             picture: profile.picture,
@@ -101,14 +98,13 @@ export const User: React.FC<UserProps> = ({
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler);
     return function cleanUp() {
-      console.log("unloaded");
       window.removeEventListener("scroll", scrollHandler);
     };
   });
   useEffect(() => {
     axios
       .post(
-        `https://yourtubeback.cysong.net:4611/resource/lazyload`,
+        `https://localhost:4611/resource/lazyload`,
         {
           email: profile.email,
           numOfCards: videos.length,
@@ -146,27 +142,17 @@ export const User: React.FC<UserProps> = ({
     const windowBottom = windowHeight + window.pageYOffset;
     if (windowBottom >= docHeight && !isLoadMore && !isSearched) {
       if (accessToken) {
-        // this.setState({ isLoadMore: true });
-        console.log(loadCount);
         let tmp = loadCount + 1;
         countHandler(tmp);
         isLoadToggle(true);
       }
     }
   };
-  // componentWillUnmount():void {
-  //   window.removeEventListener("scroll");
-  // }
-  // componentDidUpdate() {
-  //   console.log("componentDidUpdate!");
-  // }
+
   const handleDarkModeToggle = () => {
-    //this.setState({ isDarkMode: !this.state.isDarkMode });
-    console.log("etst");
     darkModeToggler(!isDarkMode);
   };
   const handleSettingsToggle = () => {
-    //this.setState({ isSettingsOpen: !this.state.isSettingsOpen });
     settingHandler(!isSettingsOpen);
   };
   const handleKeywordUpdate = async (value: string) => {
@@ -175,7 +161,7 @@ export const User: React.FC<UserProps> = ({
   };
   const handleRemoveVideoPlayer = async (target: any) => {
     await axios.post(
-      `https://yourtubeback.cysong.net:4611/resource/delete/${target.id}`,
+      `https://localhost:4611/resource/delete/${target.id}`,
       {
         email: profile.email,
       },
@@ -189,7 +175,6 @@ export const User: React.FC<UserProps> = ({
       currentVideoHandler({} as videoInterface);
     } else {
       const position = videos.findIndex((index) => index.id === target.id);
-      console.log(position);
       videos.splice(position, 1);
       videosHandler(videos);
       totalHandler(total - 1);
@@ -199,7 +184,7 @@ export const User: React.FC<UserProps> = ({
     toggleSearch(false);
 
     let response = await axios.post(
-      "https://yourtubeback.cysong.net:4611/resource",
+      "https://localhost:4611/resource",
       {
         email: profile.email,
         picture: profile.picture,
@@ -212,14 +197,13 @@ export const User: React.FC<UserProps> = ({
         },
       }
     );
-    console.log(response.data);
     videosHandler(response.data.videos);
     isLoadToggle(false);
   };
 
   const syncHandler = async () => {
     const response = await axios.get(
-      `https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}`,
+      `https://localhost:4611/resource/sync/${profile.email}`,
       {
         headers: {
           Authorization: `accessToken=Bearer ${accessToken}`,
@@ -244,7 +228,7 @@ export const User: React.FC<UserProps> = ({
           />
         </div>
       </div>
-      {currentVideo.videoId ? (
+      {currentVideo.id ? (
         <div>
           <VideoPlayer
             currentVideo={currentVideo}

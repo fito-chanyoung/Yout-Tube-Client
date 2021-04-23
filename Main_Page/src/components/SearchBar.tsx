@@ -35,6 +35,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         >
           검색
         </button>
+
       </form>
     </div>
   );
