@@ -6,7 +6,9 @@ import VideoList from "../components/VideoList";
 import { Settings } from "./Settings";
 import { Header } from "../components/Header";
 import { SearchBar } from "../components/SearchBar";
-// import VideoPlayer from './VideoPlayer';
+import "../css/user.css";
+import { VideoPlayer } from "../components/VideoPlayer";
+import { useHistory } from "react-router";
 axios.defaults.withCredentials = true;
 export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, isDarkMode, darkModeToggler, }) => {
     const [isLoadMore, isLoadToggle] = useState(false);
@@ -17,6 +19,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
     const [keyword, keywordHandler] = useState("");
     const [currentVideo, currentVideoHandler] = useState({});
     const [isSettingsOpen, settingHandler] = useState(false);
+    const history = useHistory();
     const keywordCallback = useCallback((keyword) => {
         // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
         console.log("keyword changed");
@@ -120,6 +123,25 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         keywordHandler(value);
         keywordCallback(keyword);
     });
+    const handleRemoveVideoPlayer = (target) => __awaiter(void 0, void 0, void 0, function* () {
+        yield axios.post(`https://localhost:4611/resource/delete/${target.id}`, {
+            email: profile.email,
+        }, {
+            headers: {
+                Authorization: `accessToken=Bearer ${accessToken}`,
+            },
+        });
+        if (target === undefined) {
+            currentVideoHandler({});
+        }
+        else {
+            const position = videos.findIndex((index) => index.id === target.id);
+            console.log(position);
+            videos.splice(position, 1);
+            videosHandler(videos);
+            totalHandler(total - 1);
+        }
+    });
     const makeDefault = () => __awaiter(void 0, void 0, void 0, function* () {
         toggleSearch(false);
         let response = yield axios.post("https://localhost:4611/resource", {
@@ -136,10 +158,18 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         videosHandler(response.data.videos);
         isLoadToggle(false);
     });
-    return (_jsxs("div", Object.assign({ className: isDarkMode ? "darkmode" : "" }, { children: [_jsx(Header, { handleSettingsToggle: handleSettingsToggle, isDarkMode: isDarkMode }, void 0),
-            _jsx(SearchBar, { handleKeywordUpdate: handleKeywordUpdate, isDarkMode: isDarkMode }, void 0),
-            isSearched ? _jsx("div", Object.assign({ onClick: makeDefault }, { children: "\uB3CC\uC544\uAC00\uAE30" }), void 0) : "",
-            _jsx("div", Object.assign({ className: "videoList" }, { children: videos.length ? (_jsx(VideoList, { isDarkMode: isDarkMode, videos: videos, profile: profile, total: total }, void 0)) : null }), void 0),
-            _jsx(Settings, { profile: profile, isSettingsOpen: isSettingsOpen, isDarkMode: isDarkMode, handleLoginToggle: handleLoginToggle, handleSettingsToggle: handleSettingsToggle, handleDarkModeToggle: handleDarkModeToggle }, void 0)] }), void 0));
+    const syncHandler = () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield axios.get(`https://localhost:4611/resource/sync/${profile.email}`, {
+            headers: {
+                Authorization: `accessToken=Bearer ${accessToken}`,
+            },
+        });
+        totalHandler(total + response.data);
+    });
+    return (_jsxs("div", Object.assign({ className: isDarkMode ? "darkmode" : "" }, { children: [_jsxs("div", Object.assign({ className: "nav" }, { children: [_jsx(Header, { handleSettingsToggle: handleSettingsToggle, isDarkMode: isDarkMode }, void 0),
+                    _jsx("div", Object.assign({ className: "mobile-hide" }, { children: _jsx(SearchBar, { handleKeywordUpdate: handleKeywordUpdate, isDarkMode: isDarkMode }, void 0) }), void 0)] }), void 0),
+            currentVideo.videoId ? (_jsx("div", { children: _jsx(VideoPlayer, { currentVideo: currentVideo, darkMode: isDarkMode, handleRemoveVideoPlayer: handleRemoveVideoPlayer, resetHandler: currentVideoHandler }, void 0) }, void 0)) : (_jsx("div", Object.assign({ className: "videoList" }, { children: videos.length ? (_jsx(VideoList, { isDarkMode: isDarkMode, videos: videos, profile: profile, total: total, onclickHandler: currentVideoHandler, handleRemovePlayList: handleRemoveVideoPlayer, isSearched: isSearched, makeDefault: makeDefault }, void 0)) : null }), void 0)),
+            _jsx(Settings, { profile: profile, isSettingsOpen: isSettingsOpen, isDarkMode: isDarkMode, handleLoginToggle: handleLoginToggle, handleSettingsToggle: handleSettingsToggle, handleDarkModeToggle: handleDarkModeToggle, handleKeywordUpdate: handleKeywordUpdate }, void 0),
+            _jsx("button", Object.assign({ className: "sync", onClick: syncHandler }, { children: "\uBAA9\uB85D \uC2F1\uD06C" }), void 0)] }), void 0));
 };
 //# sourceMappingURL=User.js.map

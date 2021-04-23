@@ -1,8 +1,13 @@
-.contents {
+.contents-container {
   width: 780px;
   height: 250px;
   background-color: whitesmoke;
   border-bottom: 1px solid #323232;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly; }
+
+.contents {
   display: flex; }
 
 .thumbnail-img {
@@ -10,6 +15,8 @@
   max-width: 250px; }
 
 .textdata {
+  min-width: 40vw;
+  max-width: 40vw;
   margin-left: 2vw;
   align-self: center; }
 
@@ -37,5 +44,13 @@
 .darkmode {
   background-color: #333333;
   color: #969696; }
+
+.list-container {
+  padding-top: 20vh; }
+
+.search-revoke {
+  position: fixed;
+  right: 0;
+  bottom: 20%; }
 
 /*# sourceMappingURL=Video.css.map */

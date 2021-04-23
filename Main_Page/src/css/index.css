@@ -44,12 +44,6 @@ fieldset > input {
   font-size: 16px;
   padding: 8px; }
 
-.VideoPlayer {
-  margin: 2% 35% 0px 35%; }
-
-.VideoPlayer.darkMode {
-  color: white; }
-
 .video.darkMode {
   background: #333;
   color: white; }

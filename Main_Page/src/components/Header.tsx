@@ -14,7 +14,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   let history = useHistory();
   return (
-    <div>
+    <div className="header-mobile">
       <div className={isDarkMode ? "YourTube darkmode" : "YourTube"}>
         <div
           className={isDarkMode ? "logo-container darkmode" : "logo-container"}
@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
         className={isDarkMode ? "modalButton darkMode" : "modalButton"}
         onClick={handleSettingsToggle}
       >
-        &#8801; Settings
+        &#8801; <span className="modal-desc">Settings</span>
       </button>
     </div>
   );

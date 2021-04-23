@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Settings.css";
 import { profileInterface } from "../App";
 import small from "../images/yourtube-small.png";
-
+import { SearchBar } from "../components/SearchBar";
 export interface SettingProps {
   profile: profileInterface;
   isSettingsOpen: boolean;
@@ -12,6 +12,7 @@ export interface SettingProps {
     HTMLDivElement | HTMLButtonElement
   >;
   handleDarkModeToggle: React.ChangeEventHandler<HTMLInputElement>;
+  handleKeywordUpdate: Function;
 }
 
 export const Settings: React.FC<SettingProps> = ({
@@ -21,6 +22,7 @@ export const Settings: React.FC<SettingProps> = ({
   handleLoginToggle,
   handleSettingsToggle,
   handleDarkModeToggle,
+  handleKeywordUpdate,
 }) => {
   return (
     <div className={isSettingsOpen ? "settings show" : "settings"}>
@@ -48,8 +50,16 @@ export const Settings: React.FC<SettingProps> = ({
             <h3 className="settings_profile_name">{profile.name}</h3>
             <p className="settings_profile_email">{profile.email}</p>
           </div>
+          <hr />
         </div>
 
+
+        <div className="mobile-search-container">
+          <SearchBar
+            isDarkMode={isDarkMode}
+            handleKeywordUpdate={handleKeywordUpdate}
+          />
+        </div>
         <hr />
         <fieldset>
           <input type="checkbox" onChange={handleDarkModeToggle} />
