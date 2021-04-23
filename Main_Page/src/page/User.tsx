@@ -57,7 +57,7 @@ export const User: React.FC<UserProps> = ({
       console.log("keyword changed");
       toggleSearch(true);
       axios
-        .post("https://localhost:4611/resource/search", {
+        .post("https://yourtubeback.cysong.net:4611/resource/search", {
           keyword: keyword,
           email: profile.email,
         })
@@ -76,7 +76,7 @@ export const User: React.FC<UserProps> = ({
     if (videos.length === 0)
       axios
         .post(
-          "https://localhost:4611/resource",
+          "https://yourtubeback.cysong.net:4611/resource",
           {
             email: profile.email,
             picture: profile.picture,
@@ -108,7 +108,7 @@ export const User: React.FC<UserProps> = ({
   useEffect(() => {
     axios
       .post(
-        `https://localhost:4611/resource/lazyload`,
+        `https://yourtubeback.cysong.net:4611/resource/lazyload`,
         {
           email: profile.email,
           numOfCards: videos.length,
@@ -175,7 +175,7 @@ export const User: React.FC<UserProps> = ({
   };
   const handleRemoveVideoPlayer = async (target: any) => {
     await axios.post(
-      `https://localhost:4611/resource/delete/${target.id}`,
+      `https://yourtubeback.cysong.net:4611/resource/delete/${target.id}`,
       {
         email: profile.email,
       },
@@ -199,7 +199,7 @@ export const User: React.FC<UserProps> = ({
     toggleSearch(false);
 
     let response = await axios.post(
-      "https://localhost:4611/resource",
+      "https://yourtubeback.cysong.net:4611/resource",
       {
         email: profile.email,
         picture: profile.picture,
@@ -219,7 +219,7 @@ export const User: React.FC<UserProps> = ({
 
   const syncHandler = async () => {
     const response = await axios.get(
-      `https://localhost:4611/resource/sync/${profile.email}`,
+      `https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}`,
       {
         headers: {
           Authorization: `accessToken=Bearer ${accessToken}`,

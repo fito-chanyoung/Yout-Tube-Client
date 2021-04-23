@@ -20,7 +20,9 @@ export const Login: React.FC<LoginProps> = (
   const handleAuthSuccess = ({ code }: any) => {
     console.log(code);
     axios
-      .post("https://localhost:4611/auth/login", { authCode: code })
+      .post("https://yourtubeback.cysong.net:4611/auth/login", {
+        authCode: code,
+      })
       .then((res) => {
         const { email, name, picture, accessToken, refreshToken } = res.data;
         console.log(res.data);
