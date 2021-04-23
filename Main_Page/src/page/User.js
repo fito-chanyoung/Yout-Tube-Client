@@ -124,8 +124,14 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         keywordCallback(keyword);
     });
     const handleRemoveVideoPlayer = (target) => __awaiter(void 0, void 0, void 0, function* () {
+        yield axios.post(`https://localhost:4611/resource/delete/${target.id}`, {
+            email: profile.email,
+        }, {
+            headers: {
+                Authorization: `accessToken=Bearer ${accessToken}`,
+            },
+        });
         if (target === undefined) {
-            yield axios.get(`https://localhost:4611/${profile.email}/${currentVideo.videoId}`);
             currentVideoHandler({});
         }
         else {

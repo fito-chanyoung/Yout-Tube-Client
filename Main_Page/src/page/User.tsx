@@ -174,10 +174,18 @@ export const User: React.FC<UserProps> = ({
     keywordCallback(keyword);
   };
   const handleRemoveVideoPlayer = async (target: any) => {
+    await axios.post(
+      `https://localhost:4611/resource/delete/${target.id}`,
+      {
+        email: profile.email,
+      },
+      {
+        headers: {
+          Authorization: `accessToken=Bearer ${accessToken}`,
+        },
+      }
+    );
     if (target === undefined) {
-      await axios.get(
-        `https://localhost:4611/${profile.email}/${currentVideo.videoId}`
-      );
       currentVideoHandler({} as videoInterface);
     } else {
       const position = videos.findIndex((index) => index.id === target.id);

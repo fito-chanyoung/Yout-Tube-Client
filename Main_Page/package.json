@@ -57,6 +57,7 @@
   "scripts": {
     "start": "webpack-dev-server --https --cert ./cert.pem --key ./key.pem",
     "build": "webpack",
+    "react-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mkbucket": "aws s3 mb s3://$npm_package_config_BUCKETNAME",
@@ -64,7 +65,7 @@
     "lsbucket": "aws s3 ls",
     "uploadObj": "aws s3 sync ./build s3://$npm_package_config_BUCKETNAME",
     "lsObj": "aws s3 ls s3://$npm_package_config_BUCKETNAME",
-    "rmObj": "aws s3 rm s3://$npm_package_config_BUCKETNAME *",
+    "rmObj": "aws s3 rm s3://$npm_package_config_BUCKETNAME --recursive",
     "storybook": "tsc --watch  & sass --watch src/sass:src/css & start-storybook -p 6006 -s ./public &  webpack & npm start",
     "build-storybook": "build-storybook -s public"
   },
