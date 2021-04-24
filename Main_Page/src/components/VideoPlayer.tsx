@@ -36,7 +36,7 @@ export const VideoPlayer: React.FC<PlayerProps> = ({
         </div>
         <hr />
         <div className="video-desc">
-          <h2>제목: {title}</h2>
+          <h2>{title}</h2>
           <button
             onClick={removeVideo}
             style={{

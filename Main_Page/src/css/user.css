@@ -18,6 +18,7 @@
     display: block; } }
 .nav {
   position: fixed;
+  width: 100%;
   z-index: 1;
   background-color: white;
   top: 0; }

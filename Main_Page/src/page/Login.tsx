@@ -3,6 +3,7 @@ import GoogleLogin from "react-google-login";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import "../css/Login.css";
+import s4 from "../assets/s4.gif";
 
 // To allow receiving & sending cookies by a CORS request successfully.
 axios.defaults.withCredentials = true;
@@ -18,12 +19,12 @@ export const Login: React.FC<LoginProps> = (
 ) => {
   const history = useHistory();
   const handleAuthSuccess = ({ code }: any) => {
-    console.log(code);
     axios
-      .post("https://localhost:4611/auth/login", { authCode: code })
+      .post("https://localhost:4611/auth/login", {
+        authCode: code,
+      })
       .then((res) => {
         const { email, name, picture, accessToken, refreshToken } = res.data;
-        console.log(res.data);
         handleLoginToggle(accessToken, refreshToken);
         handleProfileUpdate({ email, name, picture });
         history.push("/user");
@@ -42,7 +43,7 @@ export const Login: React.FC<LoginProps> = (
   return (
     <div className="container">
       <div className="left-sector">
-        <img src="../public/s4.gif" className="s4" />
+        <img src={s4} className="s4" />
       </div>
       <div className="right-sector">
         <div className="logo-desc-container">

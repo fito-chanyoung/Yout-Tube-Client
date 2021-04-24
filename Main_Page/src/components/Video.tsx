@@ -15,7 +15,7 @@ export const Video: React.FC<VideoProps> = ({
   handleRemovePlayList,
 }) => {
   function onclick(e: any) {
-    e.preventDefault();
+    console.log("ets");
     onclickHandler(video);
   }
   function onRemove() {

@@ -11,7 +11,7 @@ export const VideoPlayer = ({ currentVideo, darkMode, handleRemoveVideoPlayer, r
     }
     return (_jsx("div", Object.assign({ className: darkMode ? "VideoPlayer darkmode" : "VideoPlayer" }, { children: _jsxs("div", { children: [_jsx("div", Object.assign({ className: "iframe-wrapper" }, { children: _jsx("iframe", { frameBorder: "0", src: `https://www.youtube.com/embed/${videoId}`, allowFullScreen: true }, void 0) }), void 0),
                 _jsx("hr", {}, void 0),
-                _jsxs("div", Object.assign({ className: "video-desc" }, { children: [_jsxs("h2", { children: ["\uC81C\uBAA9: ", title] }, void 0),
+                _jsxs("div", Object.assign({ className: "video-desc" }, { children: [_jsx("h2", { children: title }, void 0),
                         _jsx("button", Object.assign({ onClick: removeVideo, style: {
                                 float: "right",
                             } }, { children: "\u00D7" }), void 0),

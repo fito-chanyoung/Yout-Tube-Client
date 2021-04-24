@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import "../css/Video.css";
 export const Video = ({ isDarkMode, video, onclickHandler, handleRemovePlayList, }) => {
     function onclick(e) {
-        e.preventDefault();
+        console.log("ets");
         onclickHandler(video);
     }
     function onRemove() {
