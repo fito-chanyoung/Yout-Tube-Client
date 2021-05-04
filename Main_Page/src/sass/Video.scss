@@ -10,7 +10,6 @@
 }
 
 .contents-container {
-  width: 780px;
   height: 250px;
   background-color: whitesmoke;
   border-bottom: 1px solid rgb(50, 50, 50);
@@ -24,6 +23,7 @@
 .thumbnail-img {
   align-content: center;
   max-width: 250px;
+  width: 100%;
 }
 
 .textdata {
@@ -69,4 +69,8 @@
   position: fixed;
   right: 0;
   bottom: 20%;
+}
+
+.reset {
+  margin: 1vw;
 }
