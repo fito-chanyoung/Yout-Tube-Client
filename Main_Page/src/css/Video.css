@@ -1,5 +1,4 @@
 .contents-container {
-  width: 780px;
   height: 250px;
   background-color: whitesmoke;
   border-bottom: 1px solid #323232;
@@ -12,7 +11,8 @@
 
 .thumbnail-img {
   align-content: center;
-  max-width: 250px; }
+  max-width: 250px;
+  width: 100%; }
 
 .textdata {
   min-width: 40vw;
@@ -52,5 +52,8 @@
   position: fixed;
   right: 0;
   bottom: 20%; }
+
+.reset {
+  margin: 1vw; }
 
 /*# sourceMappingURL=Video.css.map */

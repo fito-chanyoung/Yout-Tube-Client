@@ -30,7 +30,7 @@
 
   .modalButton {
     margin-top: 10px;
-    margin-right: 15px;
+    margin-right: 10vw;
     padding: 0px;
     float: right;
     position: relative;
@@ -49,7 +49,7 @@
 
   .modalButton {
     margin-top: 10px;
-    margin-right: 15px;
+    margin-right: 10vw;
     padding: 0px;
     float: right;
     background: none;
@@ -85,7 +85,7 @@
 
   .modalButton {
     margin-top: 10px;
-    margin-right: 15px;
+    margin-right: 10vw;
     padding: 0px;
     float: right;
     background: none;

@@ -51,9 +51,10 @@ export const User: React.FC<UserProps> = ({
   const [isSettingsOpen, settingHandler] = useState(false);
   const history = useHistory();
 
-  const keywordCallback = useCallback(
-    (keyword) => {
-      // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
+  const keywordCallback = useEffect(() => {
+    // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
+
+    if (keyword !== "") {
       toggleSearch(true);
       axios
         .post("https://localhost:4611/resource/search", {
@@ -66,9 +67,8 @@ export const User: React.FC<UserProps> = ({
         .catch((err) => {
           console.log(err);
         });
-    },
-    [keyword]
-  );
+    }
+  }, [keyword]);
   useEffect(() => {
     if (videos.length === 0)
       axios
@@ -156,8 +156,8 @@ export const User: React.FC<UserProps> = ({
     settingHandler(!isSettingsOpen);
   };
   const handleKeywordUpdate = async (value: string) => {
+    console.log("test", value);
     keywordHandler(value);
-    keywordCallback(keyword);
   };
   const handleRemoveVideoPlayer = async (target: any) => {
     await axios.post(
@@ -182,6 +182,7 @@ export const User: React.FC<UserProps> = ({
   };
   const makeDefault = async () => {
     toggleSearch(false);
+    keywordHandler("");
 
     let response = await axios.post(
       "https://localhost:4611/resource",

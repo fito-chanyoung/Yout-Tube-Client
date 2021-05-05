@@ -1,6 +1,6 @@
 import { __awaiter } from "tslib";
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import VideoList from "../components/VideoList";
 import { Settings } from "./Settings";
@@ -20,7 +20,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
     const [currentVideo, currentVideoHandler] = useState({});
     const [isSettingsOpen, settingHandler] = useState(false);
     const history = useHistory();
-    const keywordCallback = useCallback((keyword) => {
+    const keywordCallback = useEffect(() => {
         // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
         toggleSearch(true);
         axios
@@ -105,8 +105,8 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         settingHandler(!isSettingsOpen);
     };
     const handleKeywordUpdate = (value) => __awaiter(void 0, void 0, void 0, function* () {
+        console.log("test", value);
         keywordHandler(value);
-        keywordCallback(keyword);
     });
     const handleRemoveVideoPlayer = (target) => __awaiter(void 0, void 0, void 0, function* () {
         yield axios.post(`https://localhost:4611/resource/delete/${target.id}`, {
@@ -128,6 +128,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
     });
     const makeDefault = () => __awaiter(void 0, void 0, void 0, function* () {
         toggleSearch(false);
+        keywordHandler("");
         let response = yield axios.post("https://localhost:4611/resource", {
             email: profile.email,
             picture: profile.picture,
