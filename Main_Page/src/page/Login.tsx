@@ -20,7 +20,7 @@ export const Login: React.FC<LoginProps> = (
   const history = useHistory();
   const handleAuthSuccess = ({ code }: any) => {
     axios
-      .post("https://localhost:4611/auth/login", {
+      .post("https://yourtubeback.cysong.net:4611/auth/login", {
         authCode: code,
       })
       .then((res) => {

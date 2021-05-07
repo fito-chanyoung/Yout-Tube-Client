@@ -22,23 +22,25 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
     const history = useHistory();
     const keywordCallback = useEffect(() => {
         // 키워드가 변경되었습니다. 여기에서 서버로 키워드를 담아 요청을 날리세요.
-        toggleSearch(true);
-        axios
-            .post("https://localhost:4611/resource/search", {
-            keyword: keyword,
-            email: profile.email,
-        })
-            .then((body) => {
-            videosHandler(body.data);
-        })
-            .catch((err) => {
-            console.log(err);
-        });
+        if (keyword !== "") {
+            toggleSearch(true);
+            axios
+                .post("https://yourtubeback.cysong.net:4611/resource/search", {
+                keyword: keyword,
+                email: profile.email,
+            })
+                .then((body) => {
+                videosHandler(body.data);
+            })
+                .catch((err) => {
+                console.log(err);
+            });
+        }
     }, [keyword]);
     useEffect(() => {
         if (videos.length === 0)
             axios
-                .post("https://localhost:4611/resource", {
+                .post("https://yourtubeback.cysong.net:4611/resource", {
                 email: profile.email,
                 picture: profile.picture,
                 name: profile.name,
@@ -65,7 +67,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
     });
     useEffect(() => {
         axios
-            .post(`https://localhost:4611/resource/lazyload`, {
+            .post(`https://yourtubeback.cysong.net:4611/resource/lazyload`, {
             email: profile.email,
             numOfCards: videos.length,
         }, {
@@ -109,7 +111,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         keywordHandler(value);
     });
     const handleRemoveVideoPlayer = (target) => __awaiter(void 0, void 0, void 0, function* () {
-        yield axios.post(`https://localhost:4611/resource/delete/${target.id}`, {
+        yield axios.post(`https://yourtubeback.cysong.net:4611/resource/delete/${target.id}`, {
             email: profile.email,
         }, {
             headers: {
@@ -129,7 +131,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
     const makeDefault = () => __awaiter(void 0, void 0, void 0, function* () {
         toggleSearch(false);
         keywordHandler("");
-        let response = yield axios.post("https://localhost:4611/resource", {
+        let response = yield axios.post("https://yourtubeback.cysong.net:4611/resource", {
             email: profile.email,
             picture: profile.picture,
             name: profile.name,
@@ -143,7 +145,7 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         isLoadToggle(false);
     });
     const syncHandler = () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield axios.get(`https://localhost:4611/resource/sync/${profile.email}`, {
+        const response = yield axios.get(`https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}`, {
             headers: {
                 Authorization: `accessToken=Bearer ${accessToken}`,
             },
