@@ -14,7 +14,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   let history = useHistory();
   return (
-    <div className="header-mobile">
+    <div className={isDarkMode ? "header-mobile darkmod" : "header-mobile"}>
       <div className={isDarkMode ? "YourTube darkmode" : "YourTube"}>
         <div
           className={isDarkMode ? "logo-container darkmode" : "logo-container"}

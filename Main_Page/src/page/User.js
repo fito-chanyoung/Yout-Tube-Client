@@ -145,15 +145,16 @@ export const User = ({ handleLoginToggle, profile, accessToken, refreshToken, is
         isLoadToggle(false);
     });
     const syncHandler = () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield axios.get(`https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}`, {
+        const response = yield axios.get(`https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}?count=${videos.length}`, {
             headers: {
                 Authorization: `accessToken=Bearer ${accessToken}`,
             },
         });
-        totalHandler(total + response.data);
+        totalHandler(response.data.count);
+        videosHandler(response.data.video);
     });
     return (_jsxs("div", Object.assign({ className: isDarkMode ? "darkmode" : "" }, { children: [_jsxs("div", Object.assign({ className: "nav" }, { children: [_jsx(Header, { handleSettingsToggle: handleSettingsToggle, isDarkMode: isDarkMode }, void 0),
-                    _jsx("div", Object.assign({ className: "mobile-hide" }, { children: _jsx(SearchBar, { handleKeywordUpdate: handleKeywordUpdate, isDarkMode: isDarkMode }, void 0) }), void 0)] }), void 0),
+                    _jsx("div", Object.assign({ className: isDarkMode ? "mobile-hide darkmode" : "mobile-hide" }, { children: _jsx(SearchBar, { handleKeywordUpdate: handleKeywordUpdate, isDarkMode: isDarkMode }, void 0) }), void 0)] }), void 0),
             currentVideo.id ? (_jsx("div", { children: _jsx(VideoPlayer, { currentVideo: currentVideo, darkMode: isDarkMode, handleRemoveVideoPlayer: handleRemoveVideoPlayer, resetHandler: currentVideoHandler }, void 0) }, void 0)) : (_jsx("div", Object.assign({ className: "videoList" }, { children: videos.length ? (_jsx(VideoList, { isDarkMode: isDarkMode, videos: videos, profile: profile, total: total, onclickHandler: currentVideoHandler, handleRemovePlayList: handleRemoveVideoPlayer, isSearched: isSearched, makeDefault: makeDefault }, void 0)) : null }), void 0)),
             _jsx(Settings, { profile: profile, isSettingsOpen: isSettingsOpen, isDarkMode: isDarkMode, handleLoginToggle: handleLoginToggle, handleSettingsToggle: handleSettingsToggle, handleDarkModeToggle: handleDarkModeToggle, handleKeywordUpdate: handleKeywordUpdate }, void 0),
             _jsx("button", Object.assign({ className: "sync", onClick: syncHandler }, { children: "\uBAA9\uB85D \uC2F1\uD06C" }), void 0)] }), void 0));

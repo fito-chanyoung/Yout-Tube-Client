@@ -204,7 +204,7 @@ export const User: React.FC<UserProps> = ({
 
   const syncHandler = async () => {
     const response = await axios.get(
-      `https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}`,
+      `https://yourtubeback.cysong.net:4611/resource/sync/${profile.email}?count=${videos.length}`,
       {
         headers: {
           Authorization: `accessToken=Bearer ${accessToken}`,
@@ -212,7 +212,8 @@ export const User: React.FC<UserProps> = ({
       }
     );
 
-    totalHandler(total + response.data);
+    totalHandler(response.data.count);
+    videosHandler(response.data.video);
   };
 
   return (
@@ -222,7 +223,7 @@ export const User: React.FC<UserProps> = ({
           handleSettingsToggle={handleSettingsToggle}
           isDarkMode={isDarkMode}
         />
-        <div className="mobile-hide">
+        <div className={isDarkMode ? "mobile-hide darkmode" : "mobile-hide"}>
           <SearchBar
             handleKeywordUpdate={handleKeywordUpdate}
             isDarkMode={isDarkMode}

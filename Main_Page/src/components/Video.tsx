@@ -37,7 +37,11 @@ export const Video: React.FC<VideoProps> = ({
         </div>
         <div className="textdata">
           <h4 className="title">{video.title}</h4>
-          <div className="description">{video.description}</div>
+          <div className="description">
+            {video.description
+              ? video.description.slice(0, 100).concat("...")
+              : ""}
+          </div>
         </div>
       </div>
       <div
