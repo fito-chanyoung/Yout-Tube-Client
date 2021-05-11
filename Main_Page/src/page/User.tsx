@@ -259,9 +259,7 @@ export const User: React.FC<UserProps> = ({
         profile={profile}
         isSettingsOpen={isSettingsOpen}
         isDarkMode={isDarkMode}
-        handleLoginToggle={
-          handleLoginToggle as React.MouseEventHandler<HTMLButtonElement>
-        }
+        handleLoginToggle={handleLoginToggle}
         handleSettingsToggle={handleSettingsToggle}
         handleDarkModeToggle={handleDarkModeToggle}
         handleKeywordUpdate={handleKeywordUpdate}

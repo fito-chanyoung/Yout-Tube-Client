@@ -7,7 +7,7 @@ export interface SettingProps {
   profile: profileInterface;
   isSettingsOpen: boolean;
   isDarkMode: boolean;
-  handleLoginToggle: React.MouseEventHandler<HTMLButtonElement>;
+  handleLoginToggle: Function;
   handleSettingsToggle: React.MouseEventHandler<
     HTMLDivElement | HTMLButtonElement
   >;
@@ -24,6 +24,9 @@ export const Settings: React.FC<SettingProps> = ({
   handleDarkModeToggle,
   handleKeywordUpdate,
 }) => {
+  function logout() {
+    handleLoginToggle("", "");
+  }
   return (
     <div className={isSettingsOpen ? "settings show" : "settings"}>
       <div className="shadow" onClick={handleSettingsToggle} />
@@ -53,7 +56,6 @@ export const Settings: React.FC<SettingProps> = ({
           <hr />
         </div>
 
-
         <div className="mobile-search-container">
           <SearchBar
             isDarkMode={isDarkMode}
@@ -70,7 +72,7 @@ export const Settings: React.FC<SettingProps> = ({
         <div>
           <button
             className={isDarkMode ? "logout-button dark" : "logout-button"}
-            onClick={handleLoginToggle}
+            onClick={logout}
           >
             로그아웃
           </button>
